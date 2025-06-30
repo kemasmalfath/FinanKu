@@ -1,13 +1,16 @@
 <?php
-require 'config/db.php';
+require '../config/db.php';
+require '../vendor/autoload.php';
 
-header("Content-type: application/vnd-ms-excel");
-header("Content-Disposition: attachment; filename=laporan_keuangan.xls");
+use Dompdf\Dompdf;
 
-$where = '';
+session_start();
+$user_id = $_SESSION['user']['id'];
+
+$where = "WHERE t.user_id = $user_id";
 if (isset($_GET['bulan']) && $_GET['bulan'] != '') {
   $bulan = $_GET['bulan'];
-  $where = "WHERE DATE_FORMAT(t.created_at, '%Y-%m') = '$bulan'";
+  $where .= " AND DATE_FORMAT(t.created_at, '%Y-%m') = '$bulan'";
 }
 
 $sql = "
@@ -20,12 +23,12 @@ $sql = "
 
 $result = mysqli_query($conn, $sql);
 
-echo "<table border='1'>
+$html = "<h2>Laporan Keuangan</h2><table border='1' width='100%' cellspacing='0' cellpadding='5'>
 <tr><th>Tanggal</th><th>Deskripsi</th><th>Kategori</th><th>Tipe</th><th>Jumlah</th></tr>";
 
 while ($row = mysqli_fetch_assoc($result)) {
-  echo "<tr>
-    <td>" . date('d-m-Y', strtotime($row['created_at'])) . "</td>
+  $html .= "<tr>
+    <td>" . date('d M Y', strtotime($row['created_at'])) . "</td>
     <td>" . $row['description'] . "</td>
     <td>" . $row['category'] . "</td>
     <td>" . ucfirst($row['type']) . "</td>
@@ -33,5 +36,11 @@ while ($row = mysqli_fetch_assoc($result)) {
   </tr>";
 }
 
-echo "</table>";
+$html .= "</table>";
+
+$dompdf = new Dompdf();
+$dompdf->loadHtml($html);
+$dompdf->setPaper('A4', 'portrait');
+$dompdf->render();
+$dompdf->stream("laporan_keuangan.pdf");
 ?>

@@ -1,11 +1,11 @@
 <?php
 $host = 'localhost';
 $user = 'root';
-$pass = '';
-$db = 'finance_db';
+$pass = ''; // sesuaikan password MySQL kamu
+$db   = 'FinanKu';
 
 $conn = mysqli_connect($host, $user, $pass, $db);
 if (!$conn) {
-  die('Connection failed: ' . mysqli_connect_error());
+  die('Koneksi gagal: ' . mysqli_connect_error());
 }
 ?>

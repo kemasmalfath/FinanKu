@@ -1,0 +1,23 @@
+/* Custom style tambahan */
+
+body {
+  scroll-behavior: smooth;
+}
+
+/* Contoh kustomisasi sidebar jika dibutuhkan */
+.sidebar {
+  min-height: 100vh;
+}
+
+/* Highlight link aktif di sidebar */
+.sidebar a.active {
+  background-color: #2563eb; /* bg-blue-600 */
+  color: white;
+  font-weight: bold;
+}
+
+/* Tombol hover efek tambahan */
+.btn-hover:hover {
+  transform: scale(1.02);
+  transition: all 0.2s ease-in-out;
+}
