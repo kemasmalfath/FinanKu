@@ -1,133 +1,142 @@
-# 💰 Aplikasi Pencatatan Keuangan Personal
+# 💰 FinanKu — Aplikasi Pencatatan Keuangan Personal
 
-Aplikasi ini dirancang untuk membantu pengguna mencatat, memantau, dan mengelola pemasukan dan pengeluaran mereka secara sederhana, cepat, dan responsif. Dibuat menggunakan **PHP Native** dan **Tailwind CSS**, aplikasi ini sangat cocok untuk digunakan pribadi maupun sebagai latihan project CRUD dan UI.
-
----
-
-## 📝 Deskripsi Aplikasi
-
-Aplikasi ini menyediakan antarmuka web interaktif untuk mencatat semua jenis transaksi keuangan: baik pemasukan (seperti gaji, hadiah) maupun pengeluaran (seperti makan, transportasi). Dengan adanya fitur kategori, pengguna bisa mengelompokkan transaksi sesuai jenisnya. Saldo dihitung otomatis berdasarkan total pemasukan dan pengeluaran. Notifikasi akan muncul jika saldo terlalu rendah, membantu pengguna lebih waspada dalam penggunaan uang.
+**FinanKu** adalah aplikasi web sederhana berbasis **PHP Native + MySQL + Tailwind CSS** untuk mencatat dan memantau keuangan pribadi. Cocok untuk belajar proyek CRUD, pengelolaan database, autentikasi pengguna, dan desain UI responsif.
 
 ---
 
-## ⚙️ Cara Kerja Singkat
+## 🧭 Fitur Utama
 
-1. **Pengguna membuka halaman utama (`index.php`)**
-2. Pengguna dapat:
-   - Menambahkan kategori terlebih dahulu
-   - Menginput transaksi (pilih kategori, jenis pemasukan/pengeluaran, jumlah, dan deskripsi)
-3. Aplikasi secara otomatis menghitung total pemasukan dan pengeluaran
-4. Menampilkan total saldo saat ini
-5. Jika saldo di bawah batas tertentu (misal Rp 50.000), sistem memberi peringatan.
-6. Semua transaksi disimpan dalam database MySQL dan ditampilkan dalam tabel riwayat.
+- ✅ **Login & Register** multi-user
+- ✅ Tambah pemasukan dan pengeluaran
+- ✅ Kategori transaksi dinamis
+- ✅ Saldo otomatis & notifikasi ketika saldo rendah
+- ✅ Filter transaksi berdasarkan bulan
+- ✅ Ekspor laporan keuangan ke PDF & Excel
+- ✅ Antarmuka sidebar responsif
+
+---
+
+## 🖼️ Preview Tampilan
+
+📌 Sidebar navigasi, form transaksi, ringkasan saldo, dan tabel transaksi (dengan filter dan ekspor)
 
 ---
 
 ## 🛠️ Teknologi yang Digunakan
 
-- PHP Native (tanpa framework)
-- MySQL (database relasional)
-- Tailwind CSS (untuk tampilan modern dan responsif)
+- PHP Native
+- MySQL
+- Tailwind CSS
+- DomPDF (ekspor PDF)
+- PhpSpreadsheet (ekspor Excel)
 
 ---
 
-## 🎯 Fitur Utama
-
-- ✅ Tambah transaksi pemasukan/pengeluaran
-- ✅ Pilih kategori transaksi
-- ✅ Tambah kategori secara dinamis
-- ✅ Tampilkan total saldo real-time
-- ✅ Notifikasi saldo rendah
-- ✅ Riwayat transaksi urut berdasarkan waktu
-
----
-
-## 📦 Struktur Folder
+## 🗂️ Struktur Folder
 
 ```
-personal-finance/
-├── index.php                  # Halaman utama aplikasi
-├── add_transaction.php        # Simpan transaksi baru
-├── add_category.php           # Simpan kategori baru
-├── options_category.php       # Isi dropdown kategori
-├── balance_notification.php   # Tampilkan saldo dan warning
-├── transaction_list.php       # Tampilkan semua transaksi
-├── config/
-│   └── db.php                 # File koneksi database
-├── database.sql               # File SQL untuk membuat database
+FinanKu/
+├── index.php
+├── /auth/                 # Login, register, logout
+│   ├── login.php
+│   ├── logout.php
+│   └── register.php
+├── /config/
+│   └── db.php
+├── /includes/             # Komponen modular
+│   ├── header.php
+│   ├── footer.php
+│   └── sidebar.php
+├── /assets/
+│   └── style.css
+├── /vendor/               # Dompdf & PhpSpreadsheet
+├── add_transaction.php
+├── add_category.php
+├── export_pdf.php
+├── export_excel.php
+├── options_category.php
+├── transaction_list.php
+├── balance_notification.php
+├── finance_db.sql         # File SQL untuk setup awal
 └── README.md
 ```
 
 ---
 
-## 💡 Fitur Tambahan yang Bisa Dikembangkan
+## 🚀 Cara Install & Jalankan
 
-| Fitur                    | Deskripsi                                                                 |
-|-------------------------|---------------------------------------------------------------------------|
-| 🔐 Login Multi-user     | Setiap pengguna memiliki riwayat dan saldo sendiri                        |
-| 📈 Grafik & Statistik   | Visualisasi keuangan: chart pemasukan vs pengeluaran                     |
-| 📆 Filter Transaksi     | Menampilkan transaksi berdasarkan tanggal atau bulan tertentu            |
-| 💾 Export PDF/Excel     | Ekspor laporan keuangan untuk dicetak atau dikirim                       |
-| 📲 Responsif Mobile     | Tampilan optimal di berbagai ukuran layar                                |
-| 🔔 Notifikasi Email     | Kirim email saat saldo rendah atau pengeluaran besar                     |
-
----
-
-## 🧪 Cara Instalasi & Jalankan
-
-### 1. Clone atau Download Project
+### 1. Clone atau Download Repo
 
 ```bash
-git clone https://github.com/namaanda/personal-finance.git
+git clone https://github.com/username/FinanKu.git
 ```
 
 ### 2. Import Database
 
-- Buka `phpMyAdmin` atau tools lain
-- Import file `database.sql`
-- Pastikan database bernama `finance_db`
+- Buka `phpMyAdmin`
+- Import file `finance_db.sql`
+- Pastikan nama database: `FinanKu`
 
-### 3. Atur Koneksi Database
+### 3. Konfigurasi Koneksi DB
 
-Edit file `config/db.php`:
+Edit file `/config/db.php`:
 
 ```php
 $host = 'localhost';
 $user = 'root';
-$pass = ''; // sesuaikan dengan password MySQL kamu
-$db   = 'finance_db';
+$pass = ''; // sesuaikan
+$db   = 'FinanKu';
 ```
 
-### 4. Jalankan di Browser
+### 4. Jalankan Aplikasi
 
-Gunakan XAMPP, Laragon, atau hosting lokal, lalu akses:
+Gunakan XAMPP, Laragon, atau Live Server:
 
 ```
-http://localhost/personal-finance/index.php
+http://localhost/FinanKu/
 ```
+
+> Daftar akun terlebih dahulu, lalu login untuk mulai mencatat transaksi.
 
 ---
 
+## 🔒 Sistem Login & Multi-user
 
+- Setiap pengguna memiliki data transaksi sendiri
+- Otentikasi disimpan dalam session
+- Validasi login & register disertakan
+
+---
+
+## 🧠 Fitur Lanjutan (Bisa Dikembangkan)
+
+| Fitur                      | Keterangan                                     |
+|---------------------------|------------------------------------------------|
+| 📊 Statistik & Grafik     | Pie chart atau bar chart pemasukan/pengeluaran |
+| 🔔 Email Reminder         | Notifikasi email saat saldo < Rp 50.000        |
+| 🌐 API Endpoints          | Untuk konsumsi oleh mobile apps                |
+| ☁️ Hosting Online         | Deploy ke Vercel, Netlify, atau shared hosting |
+
+---
 
 ## 🤝 Kontribusi
 
-Pull request dan kolaborasi sangat diterima! Jika kamu memiliki fitur tambahan atau perbaikan UI, silakan ajukan di GitHub repo.
+Pull request terbuka! Perbaikan bug, refactor kode, atau UI improvement sangat disambut.
 
 ---
 
-## 👨‍💻 Dibuat Oleh
+## 👨‍💻 Dibuat oleh
 
-- [Nama Anda]
-- Mahasiswa / Developer Web Pemula
-- GitHub: [github.com/namaanda](https://github.com/namaanda)
+- Nama: [Nama Anda]
+- Mahasiswa / Web Developer Pemula
+- GitHub: [https://github.com/namaanda](https://github.com/namaanda)
 
 ---
 
 ## 📄 Lisensi
 
-Project ini open-source dan bebas dikembangkan untuk penggunaan edukatif maupun pribadi. Untuk kebutuhan komersial, mohon beri atribusi atau konfirmasi terlebih dahulu.
+Open-source dan bebas digunakan untuk keperluan pribadi, edukasi, maupun modifikasi. Untuk komersial, silakan beri atribusi.
 
 ---
 
-> “Kelola uangmu hari ini, agar tidak menyesal besok.”
+> _“Catat hari ini, nikmati besok. Uangmu punya masa depan!”_
