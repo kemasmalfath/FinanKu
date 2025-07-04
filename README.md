@@ -2,7 +2,6 @@
 
 **FinanKu** adalah aplikasi web sederhana berbasis **PHP Native + MySQL + Tailwind CSS** untuk mencatat dan memantau keuangan pribadi. Cocok untuk belajar proyek CRUD, pengelolaan database, autentikasi pengguna, dan desain UI responsif.
 
----
 
 ## 🧭 Fitur Utama
 
